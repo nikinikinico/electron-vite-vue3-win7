@@ -1,0 +1,41 @@
+{
+  "name": "electron-vite-vue3-win7",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --mode development",
+    "pro": "vite --mode production",
+    "build": "vue-tsc && vite build --mode production&& electron-builder",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "axios": "^1.6.8",
+    "electron-extension-installer": "^1.2.0",
+    "element-plus": "^2.7.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.21",
+    "vue-i18n": "^9.12.1",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@iconify-json/ep": "^1.1.15",
+    "@types/mockjs": "^1.0.10",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "electron": "^22.1.4",
+    "electron-builder": "^24.13.3",
+    "electron-devtools-installer": "^3.2.0",
+    "mockjs": "^1.1.0",
+    "sass": "^1.75.0",
+    "typescript": "^5.2.2",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-icons": "^0.18.5",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^5.1.6",
+    "vite-plugin-electron": "^0.28.4",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vue-tsc": "^1.8.27"
+  },
+  "main": "dist-electron/main.js"
+}
