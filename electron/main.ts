@@ -1,4 +1,4 @@
-import { app, BrowserWindow,session } from 'electron'
+import { app, BrowserWindow,session,ipcMain } from 'electron'
 import path from 'node:path'
 // The built directory structure
 //
@@ -59,3 +59,11 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
+
+/**
+ * ipc通信
+ */
+/**打开控制台 */
+ipcMain.on('openDevtools',(event:Electron.IpcMainEvent)=>{
+  event.sender.openDevTools()
+})
