@@ -1,4 +1,5 @@
-import { app, BrowserWindow,session,ipcMain } from 'electron'
+import { app, BrowserWindow,session,ipcMain,globalShortcut } from 'electron'
+import Store from 'electron-store'
 import path from 'node:path'
 // The built directory structure
 //
@@ -12,7 +13,8 @@ import path from 'node:path'
 process.env.DIST = path.join(__dirname, '../dist')
 process.env.VITE_PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.DIST, '../public')
 
-
+const store = new Store()
+Store.initRenderer() // 如果未在主进程创建实例，要在渲染层中使用时，需要进行初始化
 let win: BrowserWindow | null
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
@@ -23,6 +25,9 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      sandbox: false,
+      // nodeIntegration:true,
+      // contextIsolation:false
     },
   })
 
@@ -38,6 +43,14 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
+  // 打开配置页面
+  globalShortcut.register('CommandOrControl+Shift+F', () => {
+    win?.webContents.send('openConfig')
+  })
+  //在编辑器中打开系统配置
+  globalShortcut.register('CommandOrControl+Shift+Alt+L', () => {
+    store.openInEditor()
+  })
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -66,4 +79,14 @@ app.whenReady().then(createWindow)
 /**打开控制台 */
 ipcMain.on('openDevtools',(event:Electron.IpcMainEvent)=>{
   event.sender.openDevTools()
+})
+
+/**获取electron-store的配置文件 */
+ipcMain.handle('getStore',(event:Electron.IpcMainInvokeEvent,arg:string)=>{
+  return store.get(arg)
+})
+
+/**设置electron-store的配置文件 */
+ipcMain.on('setStore',(event:Electron.IpcMainInvokeEvent,...args:any[])=>{
+  (store.set as (...args: any[]) => void)(...args);
 })

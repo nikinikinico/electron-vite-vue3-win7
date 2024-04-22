@@ -15,6 +15,10 @@ const router = createRouter({
       path: '/about', 
       component: () => import('@/demo/About.vue') 
     },
+    {
+      path:'/config',
+      component:()=> import('@/components/CommonConfig.vue')
+    }
   ],
 })
 

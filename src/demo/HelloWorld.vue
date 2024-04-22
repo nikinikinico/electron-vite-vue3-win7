@@ -38,7 +38,7 @@ const count = ref(0)
     <i-ep-edit />
   </el-icon>
   <el-button @click="goTo('/about')">去到about页面</el-button>
-
+  <el-button @click="goTo('/config')">去到配置页面</el-button>
   <el-button @click="loginBtn">登录</el-button>
   <el-button @click="userInfoBtn">用户信息</el-button>
   <div class="card">

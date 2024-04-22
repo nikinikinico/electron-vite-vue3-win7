@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
 console.log("dev独有的环境变量：" + import.meta.env.VITE_BASE_URL);
+initListen()
+function initListen() {
+  window.ipcRenderer.on('openConfig', () => {
+    console.log('打开配置页')
+    router.push('/config')
+  })
+}
 </script>
 
 <template>
