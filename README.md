@@ -17,6 +17,23 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
+## 模板简介
+
+electron:22 版本，支持 win7（官网说支持，还未在实机上测试过）
+electron-store:电脑本地存储，位置类似 C:\Users\[用户]\AppData\Roaming\[项目名]，作用：可根据项目不同配置地址
+sass
+mockjs
+svgicon:已自动配置组件，用法<SvgIcon name="renwen" :size="15" style="color: pink"></SvgIcon>，svg 文件放置 assets/icons
+unplugin-auto-import：可自动导入组件
+axios
+pinia
+vue-router
+element-plus
+vue-i18n: 国际化
+typescript
+vuetools6.5.1: vue 的 devtool 拓展，因为 electron 版本号不对，很难用依赖方法将其装上,因此找到了适配 22 版本的 plugin，并将其以源文件形式引入。如果主动将 electron 升级为更高版本，此 devtool 将无法生效，可参考使用 vite-plugin-vue-devtools 插件
+favio：如果要修改打包的图标，修改 electron-builder.json5 文件的 nsis 和 win 选项
+
 ## 有必要记住的快捷键
 
 打开控制台: ctrl+shift+i
