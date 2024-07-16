@@ -6,7 +6,7 @@
   <GoBack></GoBack>
 </template>
 <script setup lang="ts">
-import { useBasicStore } from '../store'
+import { useBasicStore } from '@/store'
 const basic = useBasicStore()
 const add100Fn = async () => {
   const res = await basic.add100()

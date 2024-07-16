@@ -19,7 +19,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 import { ElMessage } from 'element-plus'
 const activeName = ref('server')

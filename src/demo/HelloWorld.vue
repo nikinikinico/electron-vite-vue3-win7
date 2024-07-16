@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useBasicStore } from '../store'
+import { useBasicStore } from '@/store'
 import { loginApi, getUserInfo } from '@/api/user'
 import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
 import ls from '@/utils/ls'
 const router = useRouter()
 const i18n = useI18n()

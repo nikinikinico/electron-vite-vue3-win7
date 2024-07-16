@@ -39,7 +39,9 @@ export default defineConfig({
         IconsResolver({
           prefix: 'Icon'
         })
-      ]
+      ],
+      imports: ['vue', 'vue-router', 'pinia'],
+      dts: 'src/auto-imports.d.ts'
     }),
     Components({
       resolvers: [
@@ -47,7 +49,9 @@ export default defineConfig({
         IconsResolver({
           enabledCollections: ['ep']
         })
-      ]
+      ],
+      dirs: ['src/components'],
+      dts: 'src/components.d.ts'
     }),
     Icons({
       autoInstall: true
