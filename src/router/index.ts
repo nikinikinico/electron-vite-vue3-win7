@@ -8,12 +8,12 @@ const router = createRouter({
     // 设置首页
     {
       path: '/',
-      component: () => import('@/demo/HelloWorld.vue')
+      component: () => import('@/views/Home/index.vue')
     },
     // 配置helloworld页的路径
     {
       path: '/about',
-      component: () => import('@/demo/About.vue')
+      component: () => import('@/views/About/index.vue')
     },
     {
       path: '/config',
