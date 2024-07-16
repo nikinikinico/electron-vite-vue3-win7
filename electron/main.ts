@@ -1,4 +1,4 @@
-import { app, BrowserWindow,session,ipcMain,globalShortcut } from 'electron'
+import { app, BrowserWindow, session, ipcMain, globalShortcut } from 'electron'
 import Store from 'electron-store'
 import path from 'node:path'
 // The built directory structure
@@ -11,7 +11,9 @@ import path from 'node:path'
 // │ │ └── preload.js
 // │
 process.env.DIST = path.join(__dirname, '../dist')
-process.env.VITE_PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.DIST, '../public')
+process.env.VITE_PUBLIC = app.isPackaged
+  ? process.env.DIST
+  : path.join(process.env.DIST, '../public')
 
 const store = new Store()
 Store.initRenderer() // 如果未在主进程创建实例，要在渲染层中使用时，需要进行初始化
@@ -20,20 +22,22 @@ let win: BrowserWindow | null
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
 function createWindow() {
-  session.defaultSession.loadExtension(path.resolve(__dirname,"../plugins/vuetools6.5.1"))
+  session.defaultSession.loadExtension(
+    path.resolve(__dirname, '../plugins/vuetools6.5.1')
+  )
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      sandbox: false,
+      sandbox: false
       // nodeIntegration:true,
       // contextIsolation:false
-    },
+    }
   })
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', (new Date).toLocaleString())
+    win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
   if (VITE_DEV_SERVER_URL) {
@@ -77,16 +81,22 @@ app.whenReady().then(createWindow)
  * ipc通信
  */
 /**打开控制台 */
-ipcMain.on('openDevtools',(event:Electron.IpcMainEvent)=>{
+ipcMain.on('openDevtools', (event: Electron.IpcMainEvent) => {
   event.sender.openDevTools()
 })
 
 /**获取electron-store的配置文件 */
-ipcMain.handle('getStore',(event:Electron.IpcMainInvokeEvent,arg:string)=>{
-  return store.get(arg)
-})
+ipcMain.handle(
+  'getStore',
+  (_event: Electron.IpcMainInvokeEvent, arg: string) => {
+    return store.get(arg)
+  }
+)
 
 /**设置electron-store的配置文件 */
-ipcMain.on('setStore',(event:Electron.IpcMainInvokeEvent,...args:any[])=>{
-  (store.set as (...args: any[]) => void)(...args);
-})
+ipcMain.on(
+  'setStore',
+  (_event: Electron.IpcMainInvokeEvent, ...args: any[]) => {
+    ;(store.set as (...args: any[]) => void)(...args)
+  }
+)
