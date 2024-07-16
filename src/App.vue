@@ -8,6 +8,18 @@ function initListen() {
     router.push('/config')
   })
 }
+onMounted(() => {
+  window.ipcRenderer.invoke('check-update')
+  window.ipcRenderer.on('download-progress', downloadProgressHandle)
+})
+// 版本更新，处理下载进度回调
+function downloadProgressHandle(_e: any, data: any) {
+  console.log(data)
+}
+
+onUnmounted(() => {
+  window.ipcRenderer.removeListener('download-progress', downloadProgressHandle)
+})
 </script>
 
 <template>

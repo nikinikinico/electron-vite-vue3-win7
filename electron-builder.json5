@@ -2,37 +2,43 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  $schema: "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  appId: "YourAppID",
+  $schema: 'https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json',
+  appId: 'YourAppID',
   asar: true,
-  productName: "YourAppName",
+  productName: 'YourAppName',
   directories: {
-    output: "release/${version}",
+    output: 'release/${version}'
   },
-  files: ["dist", "dist-electron"],
+  files: ['dist', 'dist-electron'],
   mac: {
-    target: ["dmg"],
-    artifactName: "${productName}-Mac-${version}-Installer.${ext}",
+    target: ['dmg'],
+    artifactName: '${productName}-Mac-${version}-Installer.${ext}'
   },
   win: {
     target: [
       {
-        target: "nsis",
-        arch: ["x64"],
-      },
+        target: 'nsis',
+        arch: ['x64']
+      }
     ],
-    artifactName: "${productName}-Windows-${version}-Setup.${ext}",
-    icon: "./public/icon.ico",
+    artifactName: '${productName}-Windows-${version}-Setup.${ext}',
+    icon: './public/icon.ico'
   },
   nsis: {
     oneClick: false,
     perMachine: false,
     allowToChangeInstallationDirectory: true,
     deleteAppDataOnUninstall: false,
-    installerIcon: "./public/icon.ico",
+    installerIcon: './public/icon.ico'
   },
   linux: {
-    target: ["AppImage"],
-    artifactName: "${productName}-Linux-${version}.${ext}",
+    target: ['AppImage'],
+    artifactName: '${productName}-Linux-${version}.${ext}'
   },
+  publish: [
+    {
+      provider: 'generic',
+      url: 'http://192.168.66.217/intercom/update'
+    }
+  ]
 }

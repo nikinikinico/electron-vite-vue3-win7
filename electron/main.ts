@@ -1,6 +1,14 @@
-import { app, BrowserWindow, session, ipcMain, globalShortcut } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  session,
+  ipcMain,
+  globalShortcut,
+  IpcMainEvent
+} from 'electron'
 import Store from 'electron-store'
 import path from 'node:path'
+import { checkUpdate } from './appVersion'
 // The built directory structure
 //
 // ├─┬─┬ dist
@@ -92,7 +100,15 @@ ipcMain.handle(
     return store.get(arg)
   }
 )
-
+/**
+ * 版本更新检测
+ */
+ipcMain.handle('check-update', (e: any) => {
+  // 获取发送通知的渲染进程窗口
+  const currentWin = getWindowByEvent(e)
+  // 升级校验
+  checkUpdate(currentWin)
+})
 /**设置electron-store的配置文件 */
 ipcMain.on(
   'setStore',
@@ -100,3 +116,17 @@ ipcMain.on(
     ;(store.set as (...args: any[]) => void)(...args)
   }
 )
+
+/**
+ * 通过窗口事件获取发送者的窗口
+ * @param event ipc发送窗口事件
+ */
+function getWindowByEvent(event: IpcMainEvent): BrowserWindow | null {
+  const webContentsId = event.sender.id
+  for (const currentWin of BrowserWindow.getAllWindows()) {
+    if (currentWin.webContents.id === webContentsId) {
+      return currentWin
+    }
+  }
+  return null
+}
