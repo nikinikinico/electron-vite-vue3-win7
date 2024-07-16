@@ -1,6 +1,6 @@
-import request from "@/utils/request";
-import { AxiosPromise } from "axios";
-import { CaptchaResult, LoginData, LoginResult } from "./types";
+import request from '@/utils/request'
+import { AxiosPromise } from 'axios'
+import { CaptchaResult, LoginData, LoginResult } from './types'
 
 /**
  * 登录API
@@ -10,10 +10,10 @@ import { CaptchaResult, LoginData, LoginResult } from "./types";
  */
 export function loginApi(data: LoginData): AxiosPromise<LoginResult> {
   return request({
-    url: "/user/login",
-    method: "post",
-    data: data,
-  });
+    url: '/user/login',
+    method: 'post',
+    data: data
+  })
 }
 
 /**
@@ -21,9 +21,9 @@ export function loginApi(data: LoginData): AxiosPromise<LoginResult> {
  */
 export function logoutApi() {
   return request({
-    url: "/user/logout",
-    method: "delete",
-  });
+    url: '/user/logout',
+    method: 'delete'
+  })
 }
 
 /**
@@ -31,17 +31,17 @@ export function logoutApi() {
  */
 export function getCaptchaApi(): AxiosPromise<CaptchaResult> {
   return request({
-    url: "/user/captcha",
-    method: "get",
-  });
+    url: '/user/captcha',
+    method: 'get'
+  })
 }
 
 /**
  * 获取用户信息
  */
-export function getUserInfo(){
+export function getUserInfo() {
   return request({
-    url:'/user/info',
-    method:'post',
+    url: '/user/info',
+    method: 'post'
   })
 }

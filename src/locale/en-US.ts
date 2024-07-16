@@ -1,4 +1,4 @@
 export default {
-    'dashboard': 'Dashboard',
-    'hello':'Hello,{msg}'
-  };
+  dashboard: 'Dashboard',
+  hello: 'Hello,{msg}'
+}

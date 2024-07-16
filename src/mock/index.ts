@@ -1,5 +1,5 @@
-import Mock from 'mockjs';
+import Mock from 'mockjs'
 import './user'
 Mock.setup({
-    timeout: '600-1000',
-  });
+  timeout: '600-1000'
+})

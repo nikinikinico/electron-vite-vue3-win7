@@ -20,12 +20,14 @@ function goTo(path: string) {
   router.push(path)
 }
 const loginBtn = () => {
-  loginApi({ username: 'a1dmin', password: 'admin' }).then(res => {
+  loginApi({ username: 'a1dmin', password: 'admin' }).then((res) => {
     console.log(res)
   })
 }
 const userInfoBtn = () => {
-  getUserInfo().then(res => { console.log(res, '用户信息') })
+  getUserInfo().then((res) => {
+    console.log(res, '用户信息')
+  })
 }
 const count = ref(0)
 </script>
@@ -45,7 +47,7 @@ const count = ref(0)
     <button type="button" @click="count++">count is {{ count }}</button>
   </div>
   <div>
-    <p>{{ $t("hello", { msg: 'wjy' }) }}</p>
+    <p>{{ $t('hello', { msg: 'wjy' }) }}</p>
     <el-dropdown @command="handleCommand">
       <span class="el-dropdown-link">
         切换语言
@@ -55,8 +57,12 @@ const count = ref(0)
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="zh-CN" :disabled="language === 'zh-CN'">中文</el-dropdown-item>
-          <el-dropdown-item command="en-US" :disabled="language === 'en-US'">English</el-dropdown-item>
+          <el-dropdown-item command="zh-CN" :disabled="language === 'zh-CN'"
+            >中文</el-dropdown-item
+          >
+          <el-dropdown-item command="en-US" :disabled="language === 'en-US'"
+            >English</el-dropdown-item
+          >
         </el-dropdown-menu>
       </template>
     </el-dropdown>

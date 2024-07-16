@@ -11,15 +11,15 @@ const router = createRouter({
       component: () => import('@/demo/HelloWorld.vue')
     },
     // 配置helloworld页的路径
-    { 
-      path: '/about', 
-      component: () => import('@/demo/About.vue') 
+    {
+      path: '/about',
+      component: () => import('@/demo/About.vue')
     },
     {
-      path:'/config',
-      component:()=> import('@/components/CommonConfig.vue')
+      path: '/config',
+      component: () => import('@/components/CommonConfig.vue')
     }
-  ],
+  ]
 })
 
 export default router

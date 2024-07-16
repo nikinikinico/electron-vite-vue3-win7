@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "Vue.volar",
-    "jingwang37.element-plus-snippets"
+    "jingwang37.element-plus-snippets",
+    "esbenp.prettier-vscode"
   ]
 }

@@ -6,7 +6,9 @@
     "dev": "vite --mode development",
     "pro": "vite --mode production",
     "build": "vue-tsc && vite build --mode production&& electron-builder",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
@@ -20,11 +22,17 @@
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.15",
+    "@rushstack/eslint-patch": "^1.10.3",
     "@types/mockjs": "^1.0.10",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
     "electron": "^22.1.4",
     "electron-builder": "^24.13.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.27.0",
     "mockjs": "^1.1.0",
+    "prettier": "^3.3.3",
     "sass": "^1.75.0",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.17.5",
