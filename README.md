@@ -19,20 +19,23 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 ## 模板简介
 
-electron:22 版本，支持 win7（官网说支持，还未在实机上测试过）
-electron-store:电脑本地存储，位置类似 C:\Users\[用户]\AppData\Roaming\[项目名]，作用：可根据项目不同配置地址
-sass
-mockjs
-svgicon:已自动配置组件，用法<SvgIcon name="renwen" :size="15" style="color: pink"></SvgIcon>，svg 文件放置 assets/icons
-unplugin-auto-import：可自动导入组件
-axios
-pinia
-vue-router
-element-plus
-vue-i18n: 国际化
-typescript
-vuetools6.5.1: vue 的 devtool 拓展，因为 electron 版本号不对，很难用依赖方法将其装上,因此找到了适配 22 版本的 plugin，并将其以源文件形式引入。如果主动将 electron 升级为更高版本，此 devtool 将无法生效，可参考使用 vite-plugin-vue-devtools 插件
-favio：如果要修改打包的图标，修改 electron-builder.json5 文件的 nsis 和 win 选项
+* electron:22 版本，支持 win7（官网说支持，还未在实机上测试过）
+* electron-store: 电脑本地存储，位置类似 C:\Users\[用户]\AppData\Roaming\[项目名]，作用：可根据项目不同配置地址
+* sass
+* mockjs
+* svgicon:已自动配置组件，用法<SvgIcon name="renwen" :size="15" style="color: pink"></SvgIcon>，svg 文件放置 assets/icons
+* unplugin-auto-import：可自动导入组件
+* axios
+* pinia
+* vue-router
+* element-plus
+* vue-i18n: 国际化
+* typescript
+* electron-log: 日志记录，存于C:\Users\[用户]\AppData\Roaming\[项目名]\logs
+* electron-updater: 软件更新，生产环境下更新地址为electron-builder.json5的publish.url, 开发环境为根目录下的dev-app-update.yml文件。打包后需将新版安装包和latest.yml一并放在更新地址下，更新后的缓存文件一般在电脑的C:\Users\[用户]\AppData\Local\[项目名-updater]。更新弹窗已封装成组件。
+* vuetools6.5.1: vue 的 devtool 拓展，因为 electron 版本号不对，很难用依赖方法将其装上,因此找到了适配 22 版本的 plugin，并将其以源文件形式引入。如果主动将 electron 升级为更高版本，此 devtool 将无法生效，可参考使用 vite-plugin-vue-devtools 插件
+* favio：如果要修改打包的图标，修改 electron-builder.json5 文件的 nsis 和 win 选项
+* eslint+prettier 增加了eslint和prettier配置，打包时会校验规则
 
 ## 有必要记住的快捷键
 
