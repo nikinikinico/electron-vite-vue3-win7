@@ -1,14 +1,8 @@
-import {
-  app,
-  BrowserWindow,
-  session,
-  ipcMain,
-  globalShortcut,
-  IpcMainEvent
-} from 'electron'
+import { app, BrowserWindow, session, ipcMain, globalShortcut } from 'electron'
 import Store from 'electron-store'
 import path from 'node:path'
-import { checkUpdate } from './appVersion'
+import { checkUpdate } from './update'
+import Logger from 'electron-log'
 // The built directory structure
 //
 // ├─┬─┬ dist
@@ -34,7 +28,7 @@ function createWindow() {
     path.resolve(__dirname, '../plugins/vuetools6.5.1')
   )
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(process.env.VITE_PUBLIC as string, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       sandbox: false
@@ -42,10 +36,15 @@ function createWindow() {
       // contextIsolation:false
     }
   })
-
+  try {
+    checkUpdate(win)
+  } catch (error) {
+    Logger.error(error)
+  }
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
+    //版本更新
   })
 
   if (VITE_DEV_SERVER_URL) {
@@ -53,7 +52,7 @@ function createWindow() {
     win.webContents.openDevTools()
   } else {
     // win.loadFile('dist/index.html')
-    win.loadFile(path.join(process.env.DIST, 'index.html'))
+    win.loadFile(path.join(process.env.DIST as string, 'index.html'))
   }
   // 打开配置页面
   globalShortcut.register('CommandOrControl+Shift+F', () => {
@@ -100,15 +99,7 @@ ipcMain.handle(
     return store.get(arg)
   }
 )
-/**
- * 版本更新检测
- */
-ipcMain.handle('check-update', (e: any) => {
-  // 获取发送通知的渲染进程窗口
-  const currentWin = getWindowByEvent(e)
-  // 升级校验
-  checkUpdate(currentWin)
-})
+
 /**设置electron-store的配置文件 */
 ipcMain.on(
   'setStore',
@@ -116,17 +107,3 @@ ipcMain.on(
     ;(store.set as (...args: any[]) => void)(...args)
   }
 )
-
-/**
- * 通过窗口事件获取发送者的窗口
- * @param event ipc发送窗口事件
- */
-function getWindowByEvent(event: IpcMainEvent): BrowserWindow | null {
-  const webContentsId = event.sender.id
-  for (const currentWin of BrowserWindow.getAllWindows()) {
-    if (currentWin.webContents.id === webContentsId) {
-      return currentWin
-    }
-  }
-  return null
-}

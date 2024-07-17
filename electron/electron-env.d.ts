@@ -25,3 +25,13 @@ declare namespace NodeJS {
 interface Window {
   ipcRenderer: import('electron').IpcRenderer
 }
+
+// IPCMAin,Render
+type IPCOneWay =
+  | 'update-available'
+  | 'update-not-available'
+  | 'download-progress'
+  | 'update-downloaded'
+  | 'update-error'
+  | 'check-update'
+  | 'update-app'
