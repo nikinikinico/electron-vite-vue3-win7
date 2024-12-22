@@ -18,6 +18,6 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     return ipcRenderer.invoke(channel, ...omit)
   }
 
-  // You can expose other APTs you need here.
+  // You can expose other APTs you need here.建议不要像如上一样直接暴露，可以暴露固定的方法，防止安全问题
   // ...
 })

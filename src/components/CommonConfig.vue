@@ -28,7 +28,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 }
 /**获取服务器地址配置 */
 async function getConfig() {
-  const res: any = await window.ipcRenderer.invoke('getStore', 'serverConfig')
+  const res: any = await ipcRenderer.invoke('getStore', 'serverConfig')
   if (res) {
     form.baseUrl = res?.baseUrl
     form.mqttUrl = res?.mqttUrl
@@ -39,7 +39,7 @@ getConfig()
 /**存储服务器地址配置 */
 function saveStore() {
   try {
-    window.ipcRenderer.send('setStore', 'serverConfig', {
+    ipcRenderer.send('setStore', 'serverConfig', {
       baseUrl: form.baseUrl,
       mqttUrl: form.mqttUrl
     })
